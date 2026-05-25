@@ -1,0 +1,41 @@
+Actua como mi desarrollador de software. Yo sere el arquitecto y supervisor tecnico de este proyecto. Nuestro objetivo es construir el sistema BookShelf de manera ordenada.
+
+Toda la arquitectura, el modelo de dominio, el contrato de la API y las reglas de trabajo estan estrictamente definidas en el archivo CLAUDE.md ubicado en este directorio. Debes leerlo exhaustivamente antes de escribir una sola linea de codigo.
+
+Para evitar saturar tu memoria de contexto y para que yo pueda mantener el control arquitectonico, trabajaremos en fases iterativas. Tienes estrictamente prohibido avanzar a la siguiente fase hasta que yo revise y apruebe la fase actual.
+
+Fase 1: Configuracion del entorno y Cloud Code.
+
+    Inicializa la estructura de carpetas exacta definida en el archivo CLAUDE.md.
+
+    Crea el archivo requirements.txt con las dependencias necesarias.
+
+    Crea y configura el archivo .claude/settings.json para definir restricciones de seguridad, asegurando que no se pueda borrar la base de datos sin mi confirmacion.
+
+    Programa una skill propia dentro del directorio .claude/skills/ que me permita poblar la base de datos con datos de prueba o validar el contrato de la API mediante un comando de barra. Muestrame el codigo de la skill para mi revision.
+
+Fase 2: Capa de Datos y Modelos.
+
+    Escribe backend/app/database.py.
+
+    Escribe backend/app/models.py con las entidades Book y Review y su relacion en cascada.
+
+    Escribe backend/app/schemas.py con las tres variantes de validaciones Pydantic por entidad.
+
+    Detente aqui y muestrame la estructura de los schemas para validar el contrato de la API antes de seguir.
+
+Fase 3: Capa de Negocio y Controladores.
+
+    Implementa las funciones en backend/app/crud.py.
+
+    Implementa los enrutadores en backend/app/routers/books.py y reviews.py utilizando inyeccion de dependencias.
+
+    Configura backend/app/main.py integrando los enrutadores y el montaje de archivos estaticos al final.
+
+Fase 4: Interfaz Vanilla.
+
+    Crea frontend/index.html, styles.css y app.js respetando la regla arquitectonica de no usar frameworks, bundlers ni librerias externas.
+
+    Implementa la logica de consumo de API usando fetch y actualiza el DOM mediante funciones de renderizado separadas.
+
+Confirma que has leido y entendido el archivo CLAUDE.md y estas instrucciones. Una vez confirmes, ejecuta unicamente la Fase 1 e informame cuando este lista para mi evaluacion.

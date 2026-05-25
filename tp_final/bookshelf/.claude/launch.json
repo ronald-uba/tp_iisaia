@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bookshelf",
+      "runtimeExecutable": "/Users/robot/PycharmProjects/tp_iisaia/tp_final/bookshelf/backend/.venv/bin/uvicorn",
+      "runtimeArgs": ["app.main:app", "--port", "8000"],
+      "cwd": "/Users/robot/PycharmProjects/tp_iisaia/tp_final/bookshelf/backend",
+      "port": 8000
+    }
+  ]
+}

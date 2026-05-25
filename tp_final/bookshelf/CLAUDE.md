@@ -64,7 +64,7 @@ Documentación automática en `/docs` (Swagger UI).
 ### Endpoints
 
 ```
-GET    /api/books              # Listar libros
+GET    /api/books              # Listar libros (acepta ?q= para buscar)
 POST   /api/books              # Crear libro
 GET    /api/books/{id}         # Obtener libro por id
 PUT    /api/books/{id}         # Actualizar libro
@@ -74,6 +74,13 @@ GET    /api/books/{id}/reviews # Listar reseñas de un libro
 POST   /api/books/{id}/reviews # Crear reseña para un libro
 DELETE /api/reviews/{id}       # Borrar reseña
 ```
+
+#### Búsqueda de libros
+
+`GET /api/books?q=<texto>` filtra los libros cuyo `title` o `author` contengan
+`<texto>` (case-insensitive, substring match). Si `q` se omite o está vacío,
+devuelve todos los libros. La query es no paginada — para el volumen del TP
+es suficiente.
 
 ### Archivos estáticos
 

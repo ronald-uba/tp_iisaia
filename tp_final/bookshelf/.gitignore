@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Base de datos local
+backend/bookshelf.db
+backend/bookshelf.db-journal
+
+# IDE
+.idea/
+.vscode/
+
+# Sistema
+.DS_Store
+
+# Pytest
+.pytest_cache/

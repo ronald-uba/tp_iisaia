@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookShelf</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>📚 BookShelf</h1>
+      <p class="subtitle">Sistema de gestión de libros y reseñas</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Toast para feedback de operaciones -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <!-- ============================================================ -->
+    <!-- VISTA: lista de libros                                       -->
+    <!-- ============================================================ -->
+    <section id="list-view">
+      <div class="section-header">
+        <h2>Libros</h2>
+        <button id="show-book-form-btn" class="btn-primary" type="button">
+          + Agregar libro
+        </button>
+      </div>
+
+      <form id="search-form" class="search-bar" role="search" autocomplete="off">
+        <label class="search-label" for="search-input">Buscar</label>
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Buscar por título o autor…"
+          maxlength="255"
+        >
+        <button type="submit" class="btn-primary">Buscar</button>
+        <button type="button" id="clear-search-btn" class="btn-ghost">Limpiar</button>
+      </form>
+
+      <form id="book-form" class="card-form hidden" autocomplete="off">
+        <h3>Nuevo libro</h3>
+        <label>
+          Título
+          <input type="text" id="book-title" required maxlength="255">
+        </label>
+        <label>
+          Autor
+          <input type="text" id="book-author" required maxlength="255">
+        </label>
+        <label>
+          Año (opcional)
+          <input type="number" id="book-year" min="0" max="2100">
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Guardar</button>
+          <button type="button" id="cancel-book-form-btn" class="btn-ghost">
+            Cancelar
+          </button>
+        </div>
+      </form>
+
+      <p id="search-summary" class="search-summary hidden"></p>
+
+      <div id="books-list" class="books-grid">
+        <!-- renderBookList() escribe acá -->
+      </div>
+      <p id="books-empty" class="empty-state hidden">
+        Todavía no hay libros. Agregá el primero.
+      </p>
+      <p id="search-empty" class="empty-state hidden">
+        No se encontraron libros que coincidan con la búsqueda.
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VISTA: detalle de libro                                      -->
+    <!-- ============================================================ -->
+    <section id="detail-view" class="hidden">
+      <button id="back-btn" class="btn-ghost" type="button">← Volver</button>
+
+      <article id="book-detail" class="book-detail">
+        <!-- renderBookDetail() escribe acá -->
+      </article>
+
+      <form id="edit-book-form" class="card-form hidden" autocomplete="off">
+        <h3>Editar libro</h3>
+        <label>
+          Título
+          <input type="text" id="edit-title" maxlength="255">
+        </label>
+        <label>
+          Autor
+          <input type="text" id="edit-author" maxlength="255">
+        </label>
+        <label>
+          Año
+          <input type="number" id="edit-year" min="0" max="2100">
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Guardar cambios</button>
+          <button type="button" id="cancel-edit-btn" class="btn-ghost">
+            Cancelar
+          </button>
+        </div>
+      </form>
+
+      <section class="reviews-section">
+        <h3>Reseñas</h3>
+
+        <form id="review-form" class="card-form" autocomplete="off">
+          <label>
+            Tu nombre
+            <input type="text" id="reviewer-name" required maxlength="120">
+          </label>
+          <label>
+            Puntaje
+            <select id="review-rating" required>
+              <option value="">— Elegí —</option>
+              <option value="1">★</option>
+              <option value="2">★★</option>
+              <option value="3">★★★</option>
+              <option value="4">★★★★</option>
+              <option value="5">★★★★★</option>
+            </select>
+          </label>
+          <label>
+            Comentario
+            <textarea id="review-comment" required maxlength="2000" rows="3"></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Publicar reseña</button>
+          </div>
+        </form>
+
+        <div id="reviews-list">
+          <!-- renderReviewList() escribe acá -->
+        </div>
+        <p id="reviews-empty" class="empty-state hidden">
+          Este libro todavía no tiene reseñas.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>TP Inteligencia Aplicada al Desarrollo de Software</small>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
