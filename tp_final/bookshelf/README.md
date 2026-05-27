@@ -331,11 +331,11 @@ bookshelf/
 ```bash
 cd backend
 python -m venv .venv
-source .venv/bin/activate         # Linux/Mac
-# .venv\Scripts\activate          # Windows
+source .venv/bin/activate        
+# .venv\Scripts\activate          
 pip install -r requirements.txt
 
-uvicorn app.main:app --reload     # http://localhost:8000
+uvicorn app.main:app --reload     
 ```
 
 - Frontend: `http://localhost:8000/`
