@@ -44,12 +44,7 @@ bookshelf/
 
 ## Modelo de dominio
 
-Dos entidades con relación uno-a-muchos:
-
-- **Book**: `id`, `title`, `author`, `published_year` (opcional), `created_at`
-- **Review**: `id`, `book_id` (FK), `reviewer_name`, `rating` (1-5), `comment`, `created_at`
-
-Un libro tiene muchas reseñas. Borrar un libro borra sus reseñas en cascada.
+Dos entidades (`Book` y `Review`) con relación uno-a-muchos. Un libro tiene muchas reseñas; borrar un libro borra sus reseñas en cascada. Los campos exactos viven en `backend/app/models.py`.
 
 ## Inicialización de la base
 
@@ -57,60 +52,14 @@ La base se crea automáticamente al arrancar la app con `Base.metadata.create_al
 
 ## Contrato API
 
-Base URL: `http://localhost:8000/api`
+Base URL: `http://localhost:8000/api`. La especificación completa (endpoints, schemas, códigos de estado) está autogenerada en `/docs` (Swagger UI) y es la fuente de verdad. Los routers viven en `backend/app/routers/`.
 
-Documentación automática en `/docs` (Swagger UI).
+Decisiones de diseño que no se ven en Swagger y deben respetarse:
 
-### Endpoints
-
-```
-GET    /api/books              # Listar libros (acepta ?q= para buscar)
-POST   /api/books              # Crear libro
-GET    /api/books/{id}         # Obtener libro por id
-PUT    /api/books/{id}         # Actualizar libro
-DELETE /api/books/{id}         # Borrar libro (cascada sobre reviews)
-
-GET    /api/books/{id}/reviews # Listar reseñas de un libro
-POST   /api/books/{id}/reviews # Crear reseña para un libro
-DELETE /api/reviews/{id}       # Borrar reseña
-```
-
-#### Búsqueda de libros
-
-`GET /api/books?q=<texto>` filtra los libros cuyo `title` o `author` contengan
-`<texto>` (case-insensitive, substring match). Si `q` se omite o está vacío,
-devuelve todos los libros. La query es no paginada — para el volumen del TP
-es suficiente.
-
-### Archivos estáticos
-
-```
-GET /             # Sirve frontend/index.html
-GET /styles.css   # Sirve frontend/styles.css
-GET /app.js       # Sirve frontend/app.js
-```
-
-Montaje en `main.py`:
-
-```python
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="static")
-```
-
-El mount de estáticos va al final, después de registrar los routers de `/api`, para no interceptar las rutas de la API.
-
-### Códigos de estado
-
-- `200 OK`: lectura exitosa
-- `201 Created`: creación exitosa, devuelve el recurso
-- `204 No Content`: borrado exitoso
-- `404 Not Found`: recurso inexistente
-- `422 Unprocessable Entity`: validación Pydantic fallida
-
-### Formato de errores
-
-```json
-{ "detail": "mensaje legible para humanos" }
-```
+- **Búsqueda**: `GET /api/books?q=<texto>` filtra por `title` o `author` (case-insensitive, substring). Sin `q` devuelve todos. No paginada — suficiente para el volumen del TP.
+- **Borrado de libro**: hace cascada sobre sus reviews.
+- **Errores**: formato estándar de FastAPI `{ "detail": "..." }`.
+- **Archivos estáticos**: el frontend se sirve con un `StaticFiles` montado en `/`. Ese mount va **al final** de `main.py`, después de registrar los routers de `/api`, para no interceptar las rutas de la API.
 
 ## Convenciones de código
 
